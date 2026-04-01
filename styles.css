@@ -218,7 +218,7 @@ h2 {
 	position: fixed;
 	top: 77px;
 	left: 50%;
-	transform: translate(-50%, -115%);
+	transform: translate(-50%, -100%);
 	width: min(1440px, calc(100% - 48px));
 	background: rgba(255, 255, 255, 0.97);
 	border: 1px solid rgba(211, 217, 228, 0.95);

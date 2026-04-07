@@ -67,6 +67,45 @@ a {
 	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95);
 }
 
+.skip-link {
+	position: absolute;
+	left: 16px;
+	top: 16px;
+	padding: 12px 16px;
+	border-radius: 10px;
+	background: #0f172a;
+	color: #ffffff;
+	z-index: 100;
+	transform: translateY(-200%);
+	transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+	transform: translateY(0);
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.form-label {
+	display: block;
+	font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 18px;
+	color: #2e374d;
+	margin-bottom: 4px;
+}
+
 .container {
 	width: var(--container);
 	margin-inline: auto;
@@ -874,7 +913,9 @@ h2 {
 }
 
 .specs-table {
+	width: 100%;
 	max-width: 1240px;
+	border-collapse: collapse;
 	border: 1.25px solid #374151;
 	border-radius: 12px;
 	overflow: hidden;
@@ -909,18 +950,20 @@ h2 {
 	color: #fff;
 }
 
-.spec-row span {
+.spec-row th,
+.spec-row td {
 	display: flex;
 	align-items: center;
 	min-width: 0;
+	text-align: left;
 }
 
-.spec-row:not(.head) span:first-child {
+.spec-row th {
 	font-weight: 500;
 	color: #ffffff;
 }
 
-.spec-row:not(.head) span:last-child {
+.spec-row td {
 	font-weight: 400;
 	color: #ffffff;
 }
@@ -1268,6 +1311,10 @@ h2 {
 	font-size: 16px;
 	line-height: 24px;
 	letter-spacing: -0.006em;
+}
+
+.catalog-form input::placeholder {
+	color: #7b8496;
 }
 
 .catalog-form .btn {
@@ -1960,13 +2007,18 @@ h2 {
 
 .mini-form input::placeholder,
 .mini-form select {
-	color: #9ca3af;
+	color: #6f7788;
 }
 
 .phone-row {
 	display: grid;
 	grid-template-columns: 72px minmax(0, 1fr);
 	gap: 8px;
+}
+
+.phone-row > div,
+.phone-row > .phone-code-field {
+	min-width: 0;
 }
 
 .phone-code-field {
@@ -2092,7 +2144,9 @@ h2 {
 	column-gap: 8px;
 }
 
-.footer-contact-item p {
+.footer-contact-item p,
+.footer-contact-item a,
+.footer-contact-item address {
 	margin: 0;
 	font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	font-size: 14px;
@@ -2100,9 +2154,10 @@ h2 {
 	line-height: 20px;
 	letter-spacing: -0.006em;
 	color: #535a61;
+	font-style: normal;
 }
 
-.footer-contact-item-address p {
+.footer-contact-item-address address {
 	max-width: 250px;
 }
 
@@ -2136,6 +2191,21 @@ h2 {
 	width: 16px;
 	height: 16px;
 	object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
 
 .footer-bottom {

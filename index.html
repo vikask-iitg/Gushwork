@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header" aria-label="Primary header">
         <div class="nav-wrap">
             <div class="container nav-row">
@@ -55,7 +56,7 @@
         </div>
     </div>
 
-    <main>
+    <main id="main-content">
         <section class="hero container" id="hero">
             <div class="hero-grid">
                 <div class="gallery" aria-label="Product image gallery">
@@ -155,22 +156,27 @@
                     <h2>Technical Specifications at a Glance</h2>
                     <p class="section-intro">Comprehensive performance data demonstrating our commitment to quality and engineering excellence.</p>
                 </div>
-                <div class="specs-table" role="table" aria-label="Technical specification table">
-                    <div class="spec-row head" role="row">
-                        <span>Parameter</span>
-                        <span>Specification</span>
-                    </div>
-                    <div class="spec-row" role="row"><span>Pipe Diameter Range</span><span>20mm to 1600mm (3/4&quot; to 63&quot;)</span></div>
-                    <div class="spec-row" role="row"><span>Pressure Ratings</span><span>PN 2.5, PN 4, PN 6, PN 8, PN 10, PN 12.5, PN 16</span></div>
-                    <div class="spec-row" role="row"><span>Standard Dimension Ratio</span><span>SDR 33, SDR 26, SDR 21, SDR 17, SDR 13.6, SDR 11</span></div>
-                    <div class="spec-row" role="row"><span>Operating Temperature</span><span>-40C to +80C (-40F to +176F)</span></div>
-                    <div class="spec-row" role="row"><span>Service Life</span><span>50+ Years (at 20 degrees C, PN 10)</span></div>
-                    <div class="spec-row" role="row"><span>Material Density</span><span>0.95 - 0.96 g/cm3</span></div>
-                    <div class="spec-row" role="row"><span>Certification Standards</span><span>IS 5984, ISO 4427, ASTM D3035</span></div>
-                    <div class="spec-row" role="row"><span>Joint Type</span><span>Butt Fusion, Electrofusion, Mechanical</span></div>
-                    <div class="spec-row" role="row"><span>Coil Lengths</span><span>Up to 500m (for smaller diameters)</span></div>
-                    <div class="spec-row" role="row"><span>Country of Origin</span><span>India</span></div>
-                </div>
+                <table class="specs-table">
+                    <caption class="sr-only">Technical specification table for Mangalam Hope Pipes products</caption>
+                    <thead>
+                        <tr class="spec-row head">
+                            <th scope="col">Parameter</th>
+                            <th scope="col">Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="spec-row"><th scope="row">Pipe Diameter Range</th><td>20mm to 1600mm (3/4&quot; to 63&quot;)</td></tr>
+                        <tr class="spec-row"><th scope="row">Pressure Ratings</th><td>PN 2.5, PN 4, PN 6, PN 8, PN 10, PN 12.5, PN 16</td></tr>
+                        <tr class="spec-row"><th scope="row">Standard Dimension Ratio</th><td>SDR 33, SDR 26, SDR 21, SDR 17, SDR 13.6, SDR 11</td></tr>
+                        <tr class="spec-row"><th scope="row">Operating Temperature</th><td>-40C to +80C (-40F to +176F)</td></tr>
+                        <tr class="spec-row"><th scope="row">Service Life</th><td>50+ Years (at 20 degrees C, PN 10)</td></tr>
+                        <tr class="spec-row"><th scope="row">Material Density</th><td>0.95 - 0.96 g/cm3</td></tr>
+                        <tr class="spec-row"><th scope="row">Certification Standards</th><td>IS 5984, ISO 4427, ASTM D3035</td></tr>
+                        <tr class="spec-row"><th scope="row">Joint Type</th><td>Butt Fusion, Electrofusion, Mechanical</td></tr>
+                        <tr class="spec-row"><th scope="row">Coil Lengths</th><td>Up to 500m (for smaller diameters)</td></tr>
+                        <tr class="spec-row"><th scope="row">Country of Origin</th><td>India</td></tr>
+                    </tbody>
+                </table>
                 <div class="section-cta-center">
                     <button type="button" class="btn btn-dark-outline specs-download-btn" data-modal-target="datasheetModal">
                         <img src="assets/Download_icon.png" alt="" aria-hidden="true" class="specs-download-icon" />
@@ -266,7 +272,8 @@
                     <p>Enter your email and an expert will share the catalogue with you.</p>
                 </div>
                 <form class="catalog-form" aria-label="Catalogue request form">
-                    <input type="email" placeholder="Email Address" aria-label="Email Address" />
+                    <label class="form-label" for="catalogEmail">Email address</label>
+                    <input id="catalogEmail" type="email" name="catalogEmail" autocomplete="email" placeholder="name@example.com" />
                     <button type="button" class="btn" data-modal-target="datasheetModal">Request Catalogue</button>
                 </form>
             </div>
@@ -408,19 +415,19 @@
                     <h3>HDPE Fittings &amp; Accessories</h3>
                     <p>Complete range of electrofusion and butt fusion fittings, including elbows, tees, reducers, and couplers for seamless pipe connections.</p>
                     <img src="assets/complete_fiping_solutions_portfolio.png" alt="HDPE fittings and accessories" />
-                    <a href="#" class="portfolio-link">Learn More</a>
+                    <a href="#" class="portfolio-link" aria-label="Learn more about HDPE fittings and accessories">Learn More</a>
                 </article>
                 <article class="portfolio-card">
                     <h3>Professional Installation Services</h3>
                     <p>Expert installation and fusion welding services ensuring optimal system performance, compliance with standards, and long-term reliability.</p>
                     <img src="assets/smart-indian-engineers.png" alt="Professional installation services" />
-                    <a href="#" class="portfolio-link">Learn More</a>
+                    <a href="#" class="portfolio-link" aria-label="Learn more about professional installation services">Learn More</a>
                 </article>
                 <article class="portfolio-card">
                     <h3>PE-RT Heating Pipes</h3>
                     <p>Polyethylene of Raised Temperature resistance pipes ideal for underfloor heating, radiator connections, and hot water applications.</p>
                     <img src="assets/complete_fiping_solutions_portfolio.png" alt="PE-RT heating pipes" />
-                    <a href="#" class="portfolio-link">Learn More</a>
+                    <a href="#" class="portfolio-link" aria-label="Learn more about PE-RT heating pipes">Learn More</a>
                 </article>
             </div>
             <div class="expert-strip">
@@ -441,9 +448,9 @@
                 <p class="section-copy">Get all the technical documentation and resources you need to make informed decisions about our HDPE piping solutions.</p>
             </div>
             <ul class="resource-list">
-                <li><span>HDPE Pipe Installation Manual (PDF)</span><button type="button" class="resource-link" data-modal-target="datasheetModal"><span>Download PDF</span><img src="assets/Download.svg" alt="" aria-hidden="true" class="resource-link-icon" /></button></li>
-                <li><span>Maintenance &amp; Inspection Handbook (PDF)</span><button type="button" class="resource-link" data-modal-target="datasheetModal"><span>Download PDF</span><img src="assets/Download.svg" alt="" aria-hidden="true" class="resource-link-icon" /></button></li>
-                <li><span>Engineering Specifications Sheet (PDF)</span><button type="button" class="resource-link" data-modal-target="datasheetModal"><span>Download PDF</span><img src="assets/Download.svg" alt="" aria-hidden="true" class="resource-link-icon" /></button></li>
+                <li><span>HDPE Pipe Installation Manual (PDF)</span><button type="button" class="resource-link" aria-label="Download HDPE Pipe Installation Manual PDF" data-modal-target="datasheetModal"><span>Download PDF</span><img src="assets/Download.svg" alt="" aria-hidden="true" class="resource-link-icon" /></button></li>
+                <li><span>Maintenance &amp; Inspection Handbook (PDF)</span><button type="button" class="resource-link" aria-label="Download Maintenance and Inspection Handbook PDF" data-modal-target="datasheetModal"><span>Download PDF</span><img src="assets/Download.svg" alt="" aria-hidden="true" class="resource-link-icon" /></button></li>
+                <li><span>Engineering Specifications Sheet (PDF)</span><button type="button" class="resource-link" aria-label="Download Engineering Specifications Sheet PDF" data-modal-target="datasheetModal"><span>Download PDF</span><img src="assets/Download.svg" alt="" aria-hidden="true" class="resource-link-icon" /></button></li>
             </ul>
         </section>
 
@@ -457,17 +464,24 @@
                 </div>
                 <form class="mini-form" aria-label="Quick enquiry form">
                     <h3>Contact Us Today</h3>
-                    <input type="text" placeholder="Full Name" aria-label="Full Name" />
-                    <input type="text" placeholder="Company Name" aria-label="Company Name" />
-                    <input type="email" placeholder="Email Address" aria-label="Email Address" />
+                    <label class="form-label" for="quickName">Full name</label>
+                    <input id="quickName" type="text" name="fullName" autocomplete="name" placeholder="Full Name" />
+                    <label class="form-label" for="quickCompany">Company name</label>
+                    <input id="quickCompany" type="text" name="company" autocomplete="organization" placeholder="Company Name" />
+                    <label class="form-label" for="quickEmail">Email address</label>
+                    <input id="quickEmail" type="email" name="email" autocomplete="email" placeholder="name@example.com" />
                     <div class="phone-row">
                         <div class="phone-code-field">
-                            <select aria-label="Country Code">
+                            <label class="form-label" for="quickCountryCode">Country code</label>
+                            <select id="quickCountryCode" name="countryCode" autocomplete="tel-country-code">
                                 <option>+91</option>
                             </select>
                             <img src="assets/Chevron_down.svg" alt="" aria-hidden="true" class="phone-code-chevron" />
                         </div>
-                        <input type="tel" placeholder="7003026616" aria-label="Phone Number" />
+                        <div>
+                            <label class="form-label" for="quickPhone">Phone number</label>
+                            <input id="quickPhone" type="tel" name="phone" autocomplete="tel-national" placeholder="7003026616" />
+                        </div>
                     </div>
                     <button type="button" class="btn btn-dark" data-modal-target="quoteModal">Request Custom Quote</button>
                 </form>
@@ -508,22 +522,22 @@
                 <div class="footer-contact-list">
                     <div class="footer-contact-item footer-contact-item-address">
                         <img src="assets/footer_map_icon.svg" alt="" aria-hidden="true" class="footer-contact-icon" />
-                        <p>2126, Road No. 2, GIDC Sachin, Surat - 394 230 Gujarat, India</p>
+                        <address>2126, Road No. 2, GIDC Sachin, Surat - 394 230 Gujarat, India</address>
                     </div>
                     <div class="footer-contact-item">
                         <img src="assets/footer_call_icon.svg" alt="" aria-hidden="true" class="footer-contact-icon" />
-                        <p>+91-XXX-XXX-XXXX</p>
+                        <a href="tel:+91XXXXXXXXXX">+91-XXX-XXX-XXXX</a>
                     </div>
                     <div class="footer-contact-item">
                         <img src="assets/footer_mail_icon.svg" alt="" aria-hidden="true" class="footer-contact-icon" />
-                        <p>info@meeraiind.com</p>
+                        <a href="mailto:info@meeraiind.com">info@meeraiind.com</a>
                     </div>
                     <div class="footer-contact-item">
                         <img src="assets/footer_support_icon.svg" alt="" aria-hidden="true" class="footer-contact-icon" />
-                        <p>support@meeraiind.com</p>
+                        <a href="mailto:support@meeraiind.com">support@meeraiind.com</a>
                     </div>
                 </div>
-                <div class="social-row">
+                <div class="social-row" aria-label="Social media links">
                     <a href="#" aria-label="LinkedIn"><img src="assets/footer_linked_icon.svg" alt="" aria-hidden="true" class="social-icon" /></a>
                     <a href="#" aria-label="X"><img src="assets/footer_x_icon.svg" alt="" aria-hidden="true" class="social-icon" /></a>
                     <a href="#" aria-label="Instagram"><img src="assets/footer_insta_icon.svg" alt="" aria-hidden="true" class="social-icon" /></a>
@@ -552,17 +566,24 @@
             </div>
             <div class="modal-card-body">
                 <form class="modal-form" aria-label="Quote modal form">
-                    <input type="text" placeholder="Full Name" aria-label="Full Name" />
-                    <input type="text" placeholder="Company Name" aria-label="Company Name" />
-                    <input type="email" placeholder="Email Address" aria-label="Email Address" />
+                    <label class="form-label" for="quoteName">Full name</label>
+                    <input id="quoteName" type="text" name="fullName" autocomplete="name" placeholder="Full Name" />
+                    <label class="form-label" for="quoteCompany">Company name</label>
+                    <input id="quoteCompany" type="text" name="company" autocomplete="organization" placeholder="Company Name" />
+                    <label class="form-label" for="quoteEmail">Email address</label>
+                    <input id="quoteEmail" type="email" name="email" autocomplete="email" placeholder="name@example.com" />
                     <div class="phone-row modal-phone-row">
                         <div class="phone-code-field">
-                            <select aria-label="Country Code">
+                            <label class="form-label" for="quoteCountryCode">Country code</label>
+                            <select id="quoteCountryCode" name="countryCode" autocomplete="tel-country-code">
                                 <option>+91</option>
                             </select>
                             <img src="assets/Chevron_down.svg" alt="" aria-hidden="true" class="phone-code-chevron" />
                         </div>
-                        <input type="tel" placeholder="7003026616" aria-label="Phone Number" />
+                        <div>
+                            <label class="form-label" for="quotePhone">Phone number</label>
+                            <input id="quotePhone" type="tel" name="phone" autocomplete="tel-national" placeholder="7003026616" />
+                        </div>
                     </div>
                 </form>
             </div>

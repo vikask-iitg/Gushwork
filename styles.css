@@ -8,6 +8,7 @@
 	--border-strong: #cfd6e2;
 	--primary: #2d3b88;
 	--primary-deep: #101a45;
+	--focus-ring: #0f62fe;
 	--accent: #f3df84;
 	--shadow-soft: 0 10px 30px rgba(17, 28, 66, 0.08);
 	--shadow-card: 0 18px 48px rgba(18, 29, 70, 0.1);
@@ -58,6 +59,12 @@ textarea {
 a {
 	color: inherit;
 	text-decoration: none;
+}
+
+:where(a[href], button, summary, input, select, textarea, [role="tab"], [role="tabpanel"]):focus-visible {
+	outline: 3px solid var(--focus-ring);
+	outline-offset: 3px;
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95);
 }
 
 .container {
@@ -128,6 +135,11 @@ h2 {
 	gap: 6px;
 }
 
+.main-nav a:hover,
+.main-nav a:focus-visible {
+	color: #1c275a;
+}
+
 .down-arrow {
 	width: 10px;
 	height: 10px;
@@ -148,13 +160,13 @@ h2 {
 	gap: 10px;
 	font-size: 14px;
 	font-weight: 400;
-	color: #6d7286;
+	color: #596072;
 	line-height: 20px;
 	letter-spacing: -0.006em;
 }
 
 .breadcrumbs span {
-	color: #4d5467;
+	color: #394154;
 }
 
 .crumb-arrow,
@@ -459,6 +471,16 @@ h2 {
 	transform: translateY(-1px);
 }
 
+.thumb[aria-selected='true'] {
+	border-color: #6b7be0;
+	box-shadow: 0 10px 24px rgba(45, 59, 136, 0.16);
+	transform: translateY(-1px);
+}
+
+.thumb:focus-visible {
+	border-color: var(--focus-ring);
+}
+
 .thumb img {
 	width: 100%;
 	height: 100%;
@@ -499,7 +521,7 @@ h2 {
 	font-size: 14px;
 	line-height: 20px;
 	font-weight: 400;
-	color: #555c70;
+	color: #495164;
 	font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -572,7 +594,7 @@ h2 {
 
 .price-label {
 	font-size: 12px;
-	color: #7a8193;
+	color: #62697a;
 	margin-bottom: 8px;
 }
 
@@ -695,7 +717,7 @@ h2 {
 	line-height: 24px;
 	font-weight: 400;
 	letter-spacing: -0.006em;
-	color: #878b94;
+	color: #676f80;
 }
 
 .logo-row {
@@ -750,7 +772,7 @@ h2 {
 .testimonials .section-copy,
 .portfolio .section-copy,
 .resources .section-copy {
-	color: #70778a;
+	color: #5c6577;
 	font-size: 16px;
 	line-height: 1.7;
 }
@@ -1175,7 +1197,7 @@ h2 {
 	font-weight: 400;
 	line-height: 24px;
 	letter-spacing: -0.006em;
-	color: #535a61;
+	color: #424953;
 }
 
 .catalog-strip,
@@ -1417,6 +1439,17 @@ h2 {
 	color: #fff;
 	border-color: var(--primary);
 	z-index: 2;
+}
+
+.process-tab[aria-selected='true'] {
+	background: var(--primary);
+	color: #fff;
+	border-color: var(--primary);
+	z-index: 2;
+}
+
+.process-tab:focus-visible {
+	border-color: var(--focus-ring);
 }
 
 .process-body {

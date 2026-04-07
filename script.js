@@ -82,6 +82,7 @@ const appsPrev = document.getElementById('appsPrev');
 const appsNext = document.getElementById('appsNext');
 const testimonialGrid = document.querySelector('.testimonial-grid');
 const processTabs = Array.from(document.querySelectorAll('.process-tab'));
+const processPanel = document.getElementById('processPanel');
 const processTitle = document.getElementById('processTitle');
 const processDescription = document.getElementById('processDescription');
 const processPoints = document.getElementById('processPoints');
@@ -95,10 +96,70 @@ const modalCloseButtons = Array.from(document.querySelectorAll('[data-close-moda
 
 let activeIndex = 0;
 let activeProcessIndex = 0;
+let activeModal = null;
+let lastFocusedElement = null;
 
 const isDesktopZoom = () => window.innerWidth > 1200;
 
-const setActiveSlide = (index) => {
+const getFocusableElements = (container) => Array.from(
+	container.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')
+).filter((element) => {
+	if (!(element instanceof HTMLElement)) {
+		return false;
+	}
+
+	return !element.hidden
+		&& !element.hasAttribute('hidden')
+		&& !element.closest('[hidden]')
+		&& !element.hasAttribute('inert');
+});
+
+const focusTabByIndex = (tabs, index) => {
+	const targetTab = tabs[index];
+	if (!targetTab) {
+		return;
+	}
+
+	targetTab.focus();
+	targetTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+};
+
+const handleHorizontalTabKeydown = (event, tabs, activeItemIndex, activateTab) => {
+	if (!tabs.length) {
+		return;
+	}
+
+	let nextIndex = activeItemIndex;
+
+	switch (event.key) {
+		case 'ArrowRight':
+		case 'Right':
+			nextIndex = (activeItemIndex + 1) % tabs.length;
+			break;
+		case 'ArrowLeft':
+		case 'Left':
+			nextIndex = (activeItemIndex - 1 + tabs.length) % tabs.length;
+			break;
+		case 'Home':
+			nextIndex = 0;
+			break;
+		case 'End':
+			nextIndex = tabs.length - 1;
+			break;
+		case 'Enter':
+		case ' ':
+			activateTab(activeItemIndex, true);
+			event.preventDefault();
+			return;
+		default:
+			return;
+	}
+
+	event.preventDefault();
+	activateTab(nextIndex, true);
+};
+
+const setActiveSlide = (index, shouldMoveFocus = false) => {
 	activeIndex = (index + imageSources.length) % imageSources.length;
 	const nextSrc = imageSources[activeIndex];
 
@@ -110,6 +171,14 @@ const setActiveSlide = (index) => {
 		const isActive = thumbIndex === activeIndex;
 		thumb.classList.toggle('active', isActive);
 		thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
+		thumb.tabIndex = isActive ? 0 : -1;
+
+		if (isActive) {
+			galleryFigure?.setAttribute('aria-labelledby', thumb.id);
+			if (shouldMoveFocus) {
+				thumb.focus();
+			}
+		}
 	});
 };
 
@@ -121,9 +190,12 @@ const createThumbnails = () => {
 		const thumbButton = document.createElement('button');
 		thumbButton.type = 'button';
 		thumbButton.className = 'thumb';
+		thumbButton.id = `gallery-tab-${index}`;
 		thumbButton.setAttribute('role', 'tab');
 		thumbButton.setAttribute('aria-selected', 'false');
+		thumbButton.setAttribute('aria-controls', 'galleryMainFigure');
 		thumbButton.setAttribute('aria-label', `View image ${index + 1}`);
+		thumbButton.tabIndex = -1;
 
 		const img = document.createElement('img');
 		img.src = source;
@@ -131,6 +203,12 @@ const createThumbnails = () => {
 
 		thumbButton.appendChild(img);
 		thumbButton.addEventListener('click', () => setActiveSlide(index));
+		thumbButton.addEventListener('keydown', (event) => {
+			const tabs = Array.from(thumbsContainer.querySelectorAll('.thumb'));
+			handleHorizontalTabKeydown(event, tabs, index, (nextIndex, shouldFocus) => {
+				setActiveSlide(nextIndex, shouldFocus);
+			});
+		});
 		thumbFragment.appendChild(thumbButton);
 	});
 
@@ -138,7 +216,7 @@ const createThumbnails = () => {
 };
 
 const onImageHoverMove = (event) => {
-	if (!isDesktopZoom()) {
+	if (!isDesktopZoom()) {   // Zoom works only on desktop screens > 1200px
 		return;
 	}
 
@@ -182,6 +260,7 @@ const handleStickyHeader = () => {
 
 	stickyHeader.classList.toggle('active', shouldShowStickyHeader);
 	stickyHeader.setAttribute('aria-hidden', shouldShowStickyHeader ? 'false' : 'true');
+	stickyHeader.toggleAttribute('inert', !shouldShowStickyHeader);
 };
 
 const setupFaqAccordion = () => {
@@ -275,6 +354,11 @@ const renderProcessStep = (index) => {
 		const isActive = tabIndex === activeProcessIndex;
 		tab.classList.toggle('active', isActive);
 		tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+		tab.tabIndex = isActive ? 0 : -1;
+
+		if (isActive) {
+			processPanel?.setAttribute('aria-labelledby', tab.id);
+		}
 	});
 };
 
@@ -284,6 +368,13 @@ const closeAllModals = () => {
 	});
 	modalBackdrop.hidden = true;
 	document.body.classList.remove('modal-open');
+	activeModal = null;
+
+	if (lastFocusedElement && lastFocusedElement.isConnected) {
+		lastFocusedElement.focus();
+	}
+
+	lastFocusedElement = null;
 };
 
 const openModal = (modalId) => {
@@ -296,9 +387,17 @@ const openModal = (modalId) => {
 		modal.hidden = modal !== targetModal;
 	});
 
+	lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
 	modalBackdrop.hidden = false;
 	targetModal.hidden = false;
 	document.body.classList.add('modal-open');
+	activeModal = targetModal;
+
+	const focusableElements = getFocusableElements(targetModal);
+	const firstFocusableElement = focusableElements[0];
+	if (firstFocusableElement) {
+		firstFocusableElement.focus();
+	}
 };
 
 createThumbnails();
@@ -332,6 +431,14 @@ enableWheelHorizontalScroll(testimonialGrid);
 
 processTabs.forEach((tab, index) => {
 	tab.addEventListener('click', () => renderProcessStep(index));
+	tab.addEventListener('keydown', (event) => {
+		handleHorizontalTabKeydown(event, processTabs, index, (nextIndex, shouldFocus) => {
+			renderProcessStep(nextIndex);
+			if (shouldFocus) {
+				focusTabByIndex(processTabs, nextIndex);
+			}
+		});
+	});
 });
 
 processPrev?.addEventListener('click', () => renderProcessStep(activeProcessIndex - 1));
@@ -363,6 +470,31 @@ modals.forEach((modal) => {
 document.addEventListener('keydown', (event) => {
 	if (event.key === 'Escape') {
 		closeAllModals();
+		return;
+	}
+
+	if (event.key !== 'Tab' || !activeModal) {
+		return;
+	}
+
+	const focusableElements = getFocusableElements(activeModal);
+	if (!focusableElements.length) {
+		event.preventDefault();
+		return;
+	}
+
+	const firstFocusableElement = focusableElements[0];
+	const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+	if (event.shiftKey && document.activeElement === firstFocusableElement) {
+		event.preventDefault();
+		lastFocusableElement.focus();
+		return;
+	}
+
+	if (!event.shiftKey && document.activeElement === lastFocusableElement) {
+		event.preventDefault();
+		firstFocusableElement.focus();
 	}
 });
 

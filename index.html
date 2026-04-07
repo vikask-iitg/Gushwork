@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <div class="scroll-header" aria-hidden="true">
+    <div class="scroll-header" aria-hidden="true" inert>
         <div class="container sticky-product-bar">
             <div class="sticky-product-meta">
                 <img src="assets/fishnet_manufacturing_1.jpg" alt="Product thumbnail" />
@@ -63,7 +63,7 @@
                         <button type="button" class="gallery-arrow left" id="prevSlide" aria-label="Previous image">
                             <img src="assets/carousel-left.svg" alt="" aria-hidden="true" class="gallery-arrow-icon gallery-arrow-icon-left" />
                         </button>
-                        <figure class="gallery-main" id="galleryMainFigure">
+                        <figure class="gallery-main" id="galleryMainFigure" role="tabpanel" tabindex="0" aria-live="polite" aria-label="Selected product image">
                             <img id="mainGalleryImage" src="assets/fishnet_manufacturing_1.jpg" alt="HDPE pipe manufacturing" />
                             <div class="zoom-lens" id="zoomLens" aria-hidden="true">
                                 <span class="zoom-lens-icon" aria-hidden="true">&#128269;</span>
@@ -326,16 +326,16 @@
             </div>
             <div class="process-panel">
                 <div class="process-tabs" id="processTabs" role="tablist" aria-label="Manufacturing process steps">
-                    <button type="button" class="process-tab active" data-process-step="0">Raw Material</button>
-                    <button type="button" class="process-tab" data-process-step="1">Extrusion</button>
-                    <button type="button" class="process-tab" data-process-step="2">Cooling</button>
-                    <button type="button" class="process-tab" data-process-step="3">Sizing</button>
-                    <button type="button" class="process-tab" data-process-step="4">Quality Control</button>
-                    <button type="button" class="process-tab" data-process-step="5">Marking</button>
-                    <button type="button" class="process-tab" data-process-step="6">Cutting</button>
-                    <button type="button" class="process-tab" data-process-step="7">Packaging</button>
+                    <button type="button" class="process-tab active" id="process-tab-0" role="tab" aria-selected="true" aria-controls="processPanel" tabindex="0" data-process-step="0">Raw Material</button>
+                    <button type="button" class="process-tab" id="process-tab-1" role="tab" aria-selected="false" aria-controls="processPanel" tabindex="-1" data-process-step="1">Extrusion</button>
+                    <button type="button" class="process-tab" id="process-tab-2" role="tab" aria-selected="false" aria-controls="processPanel" tabindex="-1" data-process-step="2">Cooling</button>
+                    <button type="button" class="process-tab" id="process-tab-3" role="tab" aria-selected="false" aria-controls="processPanel" tabindex="-1" data-process-step="3">Sizing</button>
+                    <button type="button" class="process-tab" id="process-tab-4" role="tab" aria-selected="false" aria-controls="processPanel" tabindex="-1" data-process-step="4">Quality Control</button>
+                    <button type="button" class="process-tab" id="process-tab-5" role="tab" aria-selected="false" aria-controls="processPanel" tabindex="-1" data-process-step="5">Marking</button>
+                    <button type="button" class="process-tab" id="process-tab-6" role="tab" aria-selected="false" aria-controls="processPanel" tabindex="-1" data-process-step="6">Cutting</button>
+                    <button type="button" class="process-tab" id="process-tab-7" role="tab" aria-selected="false" aria-controls="processPanel" tabindex="-1" data-process-step="7">Packaging</button>
                 </div>
-                <div class="process-body">
+                <div class="process-body" id="processPanel" role="tabpanel" tabindex="0" aria-labelledby="process-tab-0">
                     <div class="process-copy">
                         <h3 id="processTitle">High-Grade Raw Material Selection</h3>
                         <p id="processDescription">Vacuum sizing tanks ensure precise outer diameter while internal pressure maintains perfect roundness and wall thickness uniformity.</p>
